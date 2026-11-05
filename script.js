@@ -457,7 +457,7 @@ function render() {
                                     <td>${escapeHTML(row[0])}</td>
                                     <td>${escapeHTML(row[1])}</td>
                                     <td>${escapeHTML(row[2])}</td>
-                                    <td>Not recorded in supplied screenshots</td>
+                                    <td>10 December 2025</td>
                                 </tr>
                             `).join('')}
                         </tbody>
