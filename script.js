@@ -89,7 +89,7 @@ const pages = [
             ],
             [
                 'Approved Settings Register',
-                'Replace the placeholders below with settings exported from the team-approved RMS GUI configuration.'
+                'The RMS GUI ZIP contains several EEPROM screenshots with different parameter values. The values below are transcribed from the repeated RUN 21 / RUN 28 captures (RMS GUI 1.4.8, SW 6533, HW ID G2, HW Ver 37789) as a documented configuration snapshot. Because the archive also contains other differing snapshots and does not identify a signed-off master export or approval record, these are recorded as observed values and must be confirmed by the team before being treated as the approved operating baseline.'
             ],
             [
                 'Change Control',
@@ -408,6 +408,64 @@ function render() {
         // -------------------------------------------------
 
         if (p.id === 'configuration' && i === 2) {
+
+            const parameterRows = [
+                ['DC voltage limit', '340.0 V', 'DC_Volt_Limit_EEPROM (×0.1 V)'],
+                ['DC voltage hysteresis', '30.0 V', 'DC_Volt_Hyst_EEPROM (×0.1 V)'],
+                ['DC undervoltage threshold', '0.0 V (stored value)', 'DC_UnderVolt_Thresh_EEPROM (×0.1 V)'],
+                ['Inverter overtemperature limit', '95.0 °C', 'Inv_OverTemp_Limit_EEPROM (×0.1 °C)'],
+                ['Motor overtemperature limit', '95.0 °C', 'Mtr_OverTemp_Limit_EEPROM (×0.1 °C)'],
+                ['Zero-torque temperature', '95.0 °C', 'Zero_Torque_Temp_EEPROM (×0.1 °C)'],
+                ['Full-torque temperature', '60.0 °C', 'Full_Torque_Temp_EEPROM (×0.1 °C)'],
+                ['IQ current limit', '700.0 A', 'IQ_Limit_EEPROM (×0.1 A)'],
+                ['ID current limit', '700.0 A', 'ID_Limit_EEPROM (×0.1 A)'],
+                ['Motor torque limit', '140.0 Nm', 'Motor_Torque_Limit_EEPROM (×0.1 Nm)'],
+                ['Regenerative torque limit', '0.0 Nm', 'Regen_Torque_Limit_EEPROM (×0.1 Nm)'],
+                ['Braking torque limit', '15.0 Nm', 'Braking_Torque_Limit_EEPROM (×0.1 Nm)'],
+                ['Torque rate limit', '0.8 Nm (stored scale: ×0.1)', 'Torque_Rate_Limit_EEPROM (×0.1 Nm)'],
+                ['Motor overspeed limit', '6500 RPM', 'Motor_Overspeed_EEPROM'],
+                ['Maximum speed', '5000 RPM', 'Max_Speed_EEPROM'],
+                ['Valet mode speed', '10000 RPM', 'Valet_Mode_Speed_EEPROM'],
+                ['Regen fade speed', '200 RPM', 'Regen_Fade_Speed_EEPROM'],
+                ['Brake speed', '3000 RPM (RUN 28 snapshot; RUN 21 varies)', 'Break_Speed_EEPROM'],
+                ['PWM nominal frequency', '10 kHz (RUN 28 snapshot; other captures vary)', 'PWM_Nominal_Freq_EEPROM'],
+                ['PWM minimum variable frequency', '6 kHz', 'PWM_Minimum_Variable_Freq_EEPROM'],
+                ['PWM maximum variable frequency', '12 kHz', 'PWM_Maximum_Variable_Freq_EEPROM'],
+                ['PWM stall frequency', '2 kHz', 'PWM_Stall_Freq_EEPROM'],
+                ['Motor type', '128 (raw EEPROM enumeration)', 'Motor_Type_EEPROM'],
+                ['Vehicle flux', '3.4 Wb', 'Veh_Flux_EEPROM (×0.001 Wb)'],
+                ['Gamma adjustment', '3.2°', 'Gamma_Adjust_EEPROM (×0.1°)'],
+                ['CAN command bit rate', '1000 kbps', 'CAN_Bit_Rate_EEPROM'],
+                ['CAN fast message rate', '10 ms', 'CAN_Fast_Msg_Rate_EEPROM'],
+                ['CAN command message active', '1 (enabled)', 'CAN_Command_Message_Active_EEPROM']
+            ];
+
+            html += `
+                <div class="tablewrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Recorded value</th>
+                                <th>RMS GUI EEPROM symbol / notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${parameterRows.map(row => `
+                                <tr>
+                                    <td>${escapeHTML(row[0])}</td>
+                                    <td>${escapeHTML(row[1])}</td>
+                                    <td>${escapeHTML(row[2])}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                <p><strong>Important:</strong> The RMS GUI screenshots are not all identical. In particular, nominal PWM frequency appears as 8, 10, 11 and 18 kHz in different captures; the RUN 28 snapshot shows 10 kHz. Brake speed is also shown as 3000, 4000 and 4500 RPM in different captures. RUN 28 shows 3000 RPM. Some pedal-related calibration entries are zero in later captures but non-zero in earlier screenshots. These differences are intentionally not averaged or silently reconciled. Confirm the intended baseline from the latest saved EEPROM export and team approval before use.</p>
+                <p>Other raw values are intentionally not assigned physical units where the screenshot does not provide a confirmed scaling/decoding rule. For example, RTD selection (3), motor type (128), CAN ID offset (0x00A0), CAN active-message masks (0xFFFF / 0xFFFF), and flags are recorded in the raw RMS GUI export rather than interpreted here.</p>
+            `;
+
+
 
             html += `
                 <div class="tablewrap">
