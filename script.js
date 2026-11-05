@@ -149,6 +149,22 @@ const pages = [
                 '1. Identify the fault and context. 2. Consult the official CM documentation. 3. Check the relevant approved signals and configuration records. 4. Escalate electrical tests to authorised personnel. 5. Document the confirmed cause and corrective action.'
             ],
             [
+                'Past Troubleshooting Cases — Overview',
+                'These historical support discussions concern distinct incidents, even where the same email subject was reused on different dates. The motor no-spin investigation and regenerative-braking overvoltage investigation are recorded separately. These records are not approved inverter settings or instructions for unsupervised repair.'
+            ],
+            [
+                'Case 1 — Motor Not Spinning / Torque and Resolver Investigation (8–9 June 2026)',
+                'Symptoms: The motor did not spin despite inverter enable; a whirring noise occurred with a torque request, and requested torque fluctuated between full torque and zero at maximum throttle. Investigation: The team reviewed MoTeC and inverter CAN logs, motor temperature, Motor Type 65 configuration, resolver feedback, gamma adjustment EEPROM settings, ECU torque transmission, throttle calibration and sampling behaviour. Outcome: The team reported that changing throttle sensor and VCU sampling frequencies resolved the issue. Source: Re: Troubleshooting Cascadia Hardware overcurrent fault email conversation.'
+            ],
+            [
+                'Case 2 — Regenerative Braking DC Bus Overvoltage (separate occasion in reused thread)',
+                'Symptoms: Overvoltage faults occurred during regenerative braking, less frequently with regenerative torque limited to approximately 20 Nm, but sometimes still after longer driving sessions. Investigation: Inverter DC bus voltage was compared with BMS pack voltage; MoTeC/inverter diagnostics and possible DC-link disconnection or voltage rise during regen were discussed. Suggested follow-up: Capture voltage, current, motor speed, torque and fault snapshots, and review regen configuration with Cascadia support. Outcome: The correspondence does not establish a confirmed final resolution. Source: Re: Troubleshooting Cascadia Hardware overcurrent fault email conversation (separate discussion).'
+            ],
+            [
+                'Case 3 — CM200DX Remote Recovery / Suspected EEPROM Corruption (July–August 2025)',
+                'Inverter: Part 28-0098, serial 2623. Symptoms: After a CAN parameter-write operation, communication baud rate changed from 1 Mbps to 250 kbps. Following restoration of the baud rate and a power cycle, module temperatures read -273.1 °C, DC bus voltage read 0 V despite voltage being present at the terminals, and the motor could not be enabled; no active or stored faults were reported. Cascadia support discussed recovery using firmware version 6533, the defsyms_HW_version_mod.txt hardware definition symbols file, and EEPROM hardware/calibration parameter review through RMS GUI. Outcome: The emails contain recovery guidance and follow-ups but do not independently confirm successful recovery. These steps are historical context, not a generic firmware flashing procedure. Source: RE: Urgent CM200DX Remote Recovery Request email conversation.'
+            ],
+            [
                 'Fault Log Template',
                 'Record: date • vehicle state • fault text/code • relevant signals • suspected cause • verified cause • corrective action • retest result • reviewer.'
             ]
