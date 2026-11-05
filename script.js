@@ -448,6 +448,7 @@ function render() {
                                 <th>Parameter</th>
                                 <th>Recorded value</th>
                                 <th>RMS GUI EEPROM symbol / notes</th>
+                                <th>Capture date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -456,50 +457,11 @@ function render() {
                                     <td>${escapeHTML(row[0])}</td>
                                     <td>${escapeHTML(row[1])}</td>
                                     <td>${escapeHTML(row[2])}</td>
+                                    <td>Not recorded in supplied screenshots</td>
                                 </tr>
                             `).join('')}
                         </tbody>
                     </table>
-                </div>
-                <p><strong>Important:</strong> The RMS GUI screenshots are not all identical. In particular, nominal PWM frequency appears as 8, 10, 11 and 18 kHz in different captures; the RUN 28 snapshot shows 10 kHz. Brake speed is also shown as 3000, 4000 and 4500 RPM in different captures. RUN 28 shows 3000 RPM. Some pedal-related calibration entries are zero in later captures but non-zero in earlier screenshots. These differences are intentionally not averaged or silently reconciled. Confirm the intended baseline from the latest saved EEPROM export and team approval before use.</p>
-                <p>Other raw values are intentionally not assigned physical units where the screenshot does not provide a confirmed scaling/decoding rule. For example, RTD selection (3), motor type (128), CAN ID offset (0x00A0), CAN active-message masks (0xFFFF / 0xFFFF), and flags are recorded in the raw RMS GUI export rather than interpreted here.</p>
-            `;
-
-
-
-            html += `
-                <div class="tablewrap">
-
-                    <table>
-
-                        <thead>
-                            <tr>
-                                <th>Parameter</th>
-                                <th>Approved value</th>
-                                <th>Source / revision</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            ${[
-                                'DC voltage limits',
-                                'Motor current limit',
-                                'Torque limit',
-                                'CAN bitrate',
-                                'Resolver settings'
-                            ].map(x => `
-                                <tr>
-                                    <td>${x}</td>
-                                    <td>To be verified</td>
-                                    <td>Team-approved configuration</td>
-                                </tr>
-                            `).join('')}
-
-                        </tbody>
-
-                    </table>
-
                 </div>
             `;
 
